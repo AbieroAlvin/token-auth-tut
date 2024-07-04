@@ -1,4 +1,4 @@
-// In a more realistic scenario, you may want to implement user roles and permissions to control access to different parts of your application.
+// in a more realistic scenario, you may want to implement user roles and permissions to control access to different parts of your application.
 
 import express from "express";
 import jsonwebtoken from "jsonwebtoken";
@@ -6,10 +6,10 @@ import jsonwebtoken from "jsonwebtoken";
 const app = express();
 const jwt = jsonwebtoken();
 
-// Secret key for JWT (should be properly managed)
-const secretKey = "your-secure-secret-key";
+// secret key for jwt
+const secretKey = process.env.JWT_SECRET;
 
-// Mock user data with roles
+// MOCK user data with roles
 const users = [
   { id: 1, username: "john", password: "password123", role: "admin" },
   { id: 2, username: "jane", password: "secret456", role: "user" },
@@ -23,7 +23,7 @@ app.post("/login", (req, res) => {
   );
 
   if (!user) {
-    return res.status(401).json({ message: "Invalid credentials" });
+    return res.status(401).json({ message: "Invalid Credentials" });
   }
 
   // generate JWT token with user role
@@ -49,7 +49,7 @@ app.get("/admin", (req, res) => {
       return res.status(403).json({ message: "Forbidden" });
     }
 
-    // Access granted for admin users
+    // Access grantend for admin users
     res.json({ message: `Access granted to admin user with ID ${userId}` });
   } catch (error) {
     res.status(403).json({ message: "Invalid Token" });
@@ -58,7 +58,7 @@ app.get("/admin", (req, res) => {
 
 // Protected user route
 app.get("/user", (req, res) => {
-  const token = req.headers.authorization?.split(" ")[1];
+  const token = req.headers.authorization?.split("")[1];
 
   if (!token) {
     return res.status(401).json({ message: "Missing token" });
@@ -74,9 +74,9 @@ app.get("/user", (req, res) => {
     }
 
     // Access granted for regular users and admins
-    res.json({ message: `Access granted to user with ID ${userId}` });
+    res.json({ message: `Access granted to users with ID ${userId}` });
   } catch (error) {
-    res.status(403).json({ message: "Invalid token" });
+    res.status(403).json({ message: "Invalid Token" });
   }
 });
 

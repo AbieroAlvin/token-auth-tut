@@ -4,7 +4,7 @@ const app = express();
 const jwt = jsonwebtoken();
 
 // secret key for JWT(should be kept secret and properly managed)
-const secretKey = "your-secret-key";
+const secretKey = process.env.JWT_SECRET;
 
 // Mock user data
 const users = [

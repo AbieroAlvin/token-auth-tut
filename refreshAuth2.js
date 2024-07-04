@@ -58,7 +58,7 @@ app.post("/login", (req, res) => {
 });
 
 // Refresh token route
-app.post("refresh", (req, res) => {
+app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
 
   if (!refreshToken) {
@@ -131,7 +131,7 @@ app.get("/protected", (req, res) => {
     const role = decoded.role;
 
     // Access granted, perform authorized operations
-    res.json({ message: `Access granted to user with ID ${userId}` });
+    res.json({ message: `Access granted to ${role} with ID ${userId}` });
   } catch (error) {
     res.status(403).json({ message: "Invalid token" });
   }
